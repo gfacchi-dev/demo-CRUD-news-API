@@ -1,0 +1,110 @@
+﻿@model IEnumerable<DemoGestioneNews.Models.News>
+
+@{
+    ViewBag.Title = "News";
+}
+
+<h2>News</h2>
+
+<p>
+    @Html.ActionLink("Crea Nuova News", "Create")
+</p>
+
+<div class="container">
+    <div class="col-md-4">
+        <form method="post" class="form-horizontal">
+            <div class="form-group">
+                <label>
+                    Nome:
+                    <input type="text" name="Name" placeholder="Nome" value="" class="form-control" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Tipo:
+                    <input type="text" name="Type" placeholder="Tipo" value="" class="form-control" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Data Minima:
+                    <input type="date" name="DataMin" placeholder="Data Minima" value="" class="form-control" />
+                </label>
+                <label>
+                    Data Massima:
+                    <input type="date" name="DataMax" placeholder="Data Massima" value="" class="form-control" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Autore:
+                    <input type="text" name="Author" placeholder="Autore" value="" class="form-control" />
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submit" value="Filtra" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form method="post" class="form-horizontal" action="@Url.Action("DeleteNewsWithDate", "News")">
+            <div class="form-group">
+                <label>
+                    Data:
+                    <input type="date" name="DateDel" placeholder="Data" value="" class="form-control" />
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" name="submit" value="Elimina News per la data selezionata" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form method="get" class="form-horizontal" action="@Url.Action("IndexGroupByNews", "News")">
+            <input type="submit" name="submit" value="Raggruppa per News" class="btn btn-secondary"/>
+        </form>
+    </div>
+</div>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Author.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublishDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PKNews }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PKNews }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PKNews })
+        </td>
+    </tr>
+}
+
+</table>

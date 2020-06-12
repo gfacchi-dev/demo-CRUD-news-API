@@ -1,0 +1,33 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>News Raggruppate per Tipo</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Tipo
+        </th>
+        <th>
+            Numero di news
+        </th>
+    </tr>
+
+    @foreach (var item in (Dictionary<string,int>)ViewData["ListaAutori"])
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Key)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+        </tr>
+    }
+
+</table>

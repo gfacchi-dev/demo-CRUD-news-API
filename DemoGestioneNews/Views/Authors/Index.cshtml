@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DemoGestioneNews.Models.Author>
+
+@{
+    ViewBag.Title = "Autori";
+}
+
+<h2>Autori</h2>
+
+<p>
+    @Html.ActionLink("Crea Nuovo Autore", "Create")
+</p>
+
+<div class="container">
+    <div class="row">
+        <label>Età massima: @ViewData["EtaMax"]</label>
+    </div>
+    <div class="row">
+        <label>Età minima: @ViewData["EtaMin"]</label>
+    </div>
+    <div class="row">
+        <label>Età media: @ViewData["EtaMedia"]</label>
+    </div>
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PKAuthor }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PKAuthor }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PKAuthor })
+        </td>
+    </tr>
+}
+
+</table>
